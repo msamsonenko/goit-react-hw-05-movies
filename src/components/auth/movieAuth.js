@@ -26,3 +26,9 @@ export function getMovieReviews(id) {
     `${BASE_URL}movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`
   ).then(res => res.json());
 }
+
+export function searchMoviesByInput(userInput) {
+  return fetch(
+    `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${userInput}`
+  ).then(res => res.json());
+}

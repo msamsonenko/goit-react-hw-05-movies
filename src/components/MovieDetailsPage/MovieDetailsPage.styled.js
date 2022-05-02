@@ -3,7 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   padding: 10px;
-  border-bottom: 1px solid black;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid black;
+  }
 `;
 export const InfoTitle = styled.span`
   display: block;

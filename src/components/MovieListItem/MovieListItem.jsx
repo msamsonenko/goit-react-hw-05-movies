@@ -1,18 +1,20 @@
-import { Link } from 'react-router-dom';
-import { ListItem, MovieImage } from './MovieListItem.styled';
-import { getMovieById } from 'components/auth/movieAuth';
+import {
+  ListItem,
+  MovieImage,
+  MovieCardLink,
+  MovieTitle,
+} from './MovieListItem.styled';
 
 export default function MovieListItem({ movie }) {
-  const click = e => {};
   return (
     <ListItem>
-      <Link to={`movies/${movie.id}`} onClick={click}>
-        <p>{movie.title}</p>
+      <MovieCardLink to={`movies/${movie.id}`}>
+        <MovieTitle>{movie.title}</MovieTitle>
         <MovieImage
-          src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`}
           alt={movie.title}
         />
-      </Link>
+      </MovieCardLink>
     </ListItem>
   );
 }

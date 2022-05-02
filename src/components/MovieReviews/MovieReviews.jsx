@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from 'components/auth/movieAuth';
+import {
+  ListItem,
+  Author,
+  DateTime,
+  ReviewItem,
+  ReviewList,
+} from './MovieReviews.styled';
 
 export default function MovieReviews() {
   const [reviews, setReviews] = useState([]);
@@ -10,27 +17,30 @@ export default function MovieReviews() {
       setReviews(results);
     });
   }, [params.movieId]);
-  console.log(reviews);
   return (
     <ul>
-      {reviews.map(
-        ({ author, author_details, content, created_at, id, url }) => {
-          return (
-            <li key={id}>
-              <div>
-                <img
-                  src="https://www.gravatar.com/avatar/3593437cbd05cebe0a4ee753965a8ad1.jpg"
-                  alt={author}
-                />
-              </div>
-              <div>
-                <span>{created_at}</span>
-                <p>{content}</p>
-              </div>
-            </li>
-          );
-        }
-      )}
+      {reviews.map(({ author, content, created_at, id }) => {
+        let date = created_at.substr(0, 10);
+        let time = created_at.substr(11, 5);
+        return (
+          <ListItem key={id}>
+            <ReviewList>
+              <ReviewItem>
+                <Author>{author}</Author>
+              </ReviewItem>
+              <ReviewItem>
+                Date: <DateTime>{date}</DateTime>
+              </ReviewItem>
+              <ReviewItem>
+                Time: <DateTime>{time}</DateTime>
+              </ReviewItem>
+            </ReviewList>
+            <div>
+              <p>{content}</p>
+            </div>
+          </ListItem>
+        );
+      })}
     </ul>
   );
 }
