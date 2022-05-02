@@ -1,23 +1,29 @@
 import { useState, useEffect } from 'react';
-import movieAuth from 'components/auth/movieAuth';
-import Movielist from 'components/MovieList';
+// import { useNavigate } from 'react-router-dom';
+import { getPopularMovies } from 'components/auth/movieAuth';
+import MovieListItem from 'components/MovieListItem/MovieListItem';
+import { Movielist } from './HomePage.styled';
+// import { useNavigate } from 'react-router-dom';
+
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
+  // let navigate = useNavigate();
 
   useEffect(() => {
     if (movies.length !== 0) {
       return;
     }
-    console.log('hello');
-    movieAuth().then(({ results }) => {
+    getPopularMovies().then(({ results }) => {
       setMovies(state => [...state, ...results]);
     });
-  }, []);
+  });
+
   console.log(movies);
   return (
-    <div>
-      <h1>Movie Finder</h1>
-      <Movielist movies={movies} />
-    </div>
+    <Movielist>
+      {movies.map(movie => {
+        return <MovieListItem movie={movie} key={movie.id} />;
+      })}
+    </Movielist>
   );
 }
