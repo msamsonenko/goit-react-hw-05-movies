@@ -13,9 +13,6 @@ export default function MovieDetailsPage() {
     });
   }, [params.movieId]);
 
-  console.log(movie);
-  console.log(params.movieId);
-
   return (
     <>
       <MovieCard movie={movie} />

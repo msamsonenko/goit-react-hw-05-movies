@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from 'components/auth/movieAuth';
-import { List, ListItem, Name, Img } from './MovieCast.styled';
+import { List, ListItem, Name, Img } from './Cast.styled';
 
 const NO_IMAGE =
   'https://banffventureforum.com/wp-content/uploads/2019/08/No-Image.png';
 
-export default function MovieCast() {
+export default function Cast() {
   const [cast, setCast] = useState([]);
   let params = useParams();
 

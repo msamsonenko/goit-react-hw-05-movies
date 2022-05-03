@@ -7,9 +7,9 @@ import {
   DateTime,
   ReviewItem,
   ReviewList,
-} from './MovieReviews.styled';
+} from './Reviews.styled';
 
-export default function MovieReviews() {
+export default function Reviews() {
   const [reviews, setReviews] = useState([]);
   let params = useParams();
   useEffect(() => {
@@ -17,6 +17,9 @@ export default function MovieReviews() {
       setReviews(results);
     });
   }, [params.movieId]);
+  if (reviews.length === 0) {
+    return <div>No reviews for this movie found</div>;
+  }
   return (
     <ul>
       {reviews.map(({ author, content, created_at, id }) => {

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const MovieContainer = styled.div`
   display: flex;
   width: 100%;
+  background: #fff;
+  margin: 10px;
 `;
 export const ContentWrapper = styled.div`
   width: 30%;

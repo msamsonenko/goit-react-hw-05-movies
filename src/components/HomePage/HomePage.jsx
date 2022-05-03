@@ -18,7 +18,13 @@ export default function HomePage() {
   return (
     <Movielist>
       {movies.map(movie => {
-        return <MovieListItem movie={movie} key={movie.id} />;
+        return (
+          <MovieListItem
+            movie={movie}
+            key={movie.id}
+            link={`movies/${movie.id}`}
+          />
+        );
       })}
     </Movielist>
   );
