@@ -1,4 +1,3 @@
-//strict mode return
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MovieList from 'components/MovieList/MovieList';
