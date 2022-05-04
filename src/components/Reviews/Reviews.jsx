@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from 'components/auth/movieAuth';
+import Notiflix from 'notiflix';
 import {
   ListItem,
   Author,
@@ -18,7 +19,7 @@ export default function Reviews() {
     });
   }, [params.movieId]);
   if (reviews.length === 0) {
-    return <div>No reviews for this movie found</div>;
+    return Notiflix.Notify.failure('No reviews found for this movie');
   }
   return (
     <ul>

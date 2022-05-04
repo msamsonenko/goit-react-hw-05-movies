@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
 import { searchMoviesByInput } from 'components/auth/movieAuth';
+import Notiflix from 'notiflix';
 import MovieListItem from 'components/MovieListItem/MovieListItem';
 import {
   Movielist,
@@ -20,10 +20,17 @@ export default function MoviesPage() {
   };
   const onFormSubmit = e => {
     e.preventDefault();
-    searchMoviesByInput(userInput).then(({ results }) => {
-      setMovies(state => [...state, ...results]);
+    if (userInput === '') {
+      return Notiflix.Notify.failure('Please enter movie name');
+    }
+    searchMoviesByInput(userInput).then(({ results, total_results }) => {
+      if (results.length === 0) {
+        return Notiflix.Notify.failure('Please enter a valid movie name');
+      }
+      Notiflix.Notify.success(`A total of ${total_results} movies found`);
+      setMovies(results);
+      console.log(movies);
     });
-    console.log(movies);
     reset();
   };
   const reset = () => {
@@ -40,14 +47,14 @@ export default function MoviesPage() {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Search movies"
           />
           <SerachFormBtn type="submit">
             <ImSearch />
           </SerachFormBtn>
         </SearchForm>
       </SearchBarContainer>
-      <Outlet />
+
       <Movielist>
         {movies.map(movie => {
           return (
